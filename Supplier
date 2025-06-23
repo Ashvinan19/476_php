@@ -1,3 +1,8 @@
+0. To create the database
+
+CREATE DATABASE IF NOT EXISTS InventoryDB;
+USE InventoryDB;
+
 1.Create Supplier Table 
 CREATE TABLE SupplierTable (
     SupplierID INT PRIMARY KEY,
