@@ -1,5 +1,5 @@
-1. Create InventoryTable structure
-CREATE TABLE InventoryTable (
+-- 1. Create InventoryTable structure
+CREATE TABLE IF NOT EXISTS InventoryTable (
     ProductID INT,
     ProductName VARCHAR(100),
     Quantity INT,
@@ -9,7 +9,7 @@ CREATE TABLE InventoryTable (
     PRIMARY KEY (ProductID, SupplierName, Status)
 );
 
-2. Populate InventoryTable by joining ProductTable and SupplierTable
+-- 2. Populate InventoryTable by joining ProductTable and SupplierTable
 INSERT INTO InventoryTable (ProductID, ProductName, Quantity, Price, Status, SupplierName)
 SELECT 
     p.ProductID,
