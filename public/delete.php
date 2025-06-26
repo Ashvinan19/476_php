@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once '../includes/db.php';
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
@@ -31,16 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Delete Product</title>
 </head>
 <body>
-    <div style="position: fixed; top: 0; right: 0; width: 200px; height: 100%; background-color: #f0f0f0; padding: 20px;">
-        <h4>Navigation</h4>
-        <ul style="list-style-type: none; padding: 0;">
-            <li><a href="uploadFile.php">Upload File</a></li>
-            <li><a href="search.php">Search Inventory</a></li>
-            <li><a href="delete.php">Delete Product</a></li>
-            <li><a href="update.php">Update Product</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-    </div>
+    <?php include '../includes/navbar.php'; ?>
     <h2>Delete Product from Inventory</h2>
     <form method="post">
         <label>Product ID:</label><br>
