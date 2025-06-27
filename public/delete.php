@@ -1,23 +1,30 @@
 <?php
 session_start();
-require_once '../includes/db.php';
+require_once 'db.php';
+
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
 
 $message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $productID = $_POST["product_id"] ?? '';
+    $supplierName = $_POST["supplier_name"] ?? '';
 
     try {
-        $stmt = $pdo->prepare("DELETE FROM InventoryTable WHERE ProductID = ?");
-        $stmt->execute([$productID]);
+        $stmt = $pdo->prepare("
+            DELETE FROM InventoryTable 
+            WHERE ProductID = ? 
+              AND TRIM(SupplierName) COLLATE utf8mb4_general_ci = TRIM(?) COLLATE utf8mb4_general_ci
+        ");
+        $stmt->execute([$productID, $supplierName]);
 
         if ($stmt->rowCount()) {
-            $message = "Record deleted successfully.";
+            $message = "Record were successfully deleted.";
         } else {
-            $message = "No matching record found.";
+            $message = "No matching record were found for ProductID {$productID} and Supplier '{$supplierName}'.";
         }
     } catch (PDOException $e) {
         $message = "Error: " . $e->getMessage();
@@ -31,11 +38,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Delete Product</title>
 </head>
 <body>
-    <?php include '../includes/navbar.php'; ?>
+    <div style="position: fixed; top: 0; right: 0; width: 200px; height: 100%; background-color: #f0f0f0; padding: 20px;">
+        <h4>Navigation</h4>
+        <ul style="list-style-type: none; padding: 0;">
+            <li><a href="uploadFile.php">Upload File</a></li>
+            <li><a href="search.php">Search Inventory</a></li>
+            <li><a href="delete.php">Delete Product</a></li>
+            <li><a href="update.php">Update Product</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+    </div>
+
     <h2>Delete Product from Inventory</h2>
     <form method="post">
         <label>Product ID:</label><br>
         <input type="number" name="product_id" required><br><br>
+
+        <label>Supplier Name:</label><br>
+        <input type="text" name="supplier_name" required><br><br>
+
         <input type="submit" value="Delete">
     </form>
 
