@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Debug: Check current session state (for troubleshooting only)
-//echo "Session user: " . ($_SESSION["user"] ?? "not set") . "<br>";
+// echo "Session user: " . ($_SESSION["user"] ?? "not set") . "<br>";
 require_once '../includes/db.php';
 
 $error = "";
@@ -21,9 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             error_log("Password matched for user: $username");
             $_SESSION["user"] = $username;
             header("Location: dashboard.php?login=success");
+            echo "Session user just set: " . $_SESSION["user"];
             exit();
         } else {
             error_log("Password mismatch for user: $username");
+            echo "ERROR: " . $username . " - Password mismatch.";
             $error = "Invalid username or password.";
         }
     } else {
@@ -39,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
 </head>
 <body>
-    <?php include '../includes/navbar.php'; ?>
+    <!--<?php include '../includes/navbar.php'; ?>-->
     <h2>Login</h2>
     <?php if (!empty($error)): ?>
         <div style="color:red; font-weight:bold; margin-bottom:15px;">

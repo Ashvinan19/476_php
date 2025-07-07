@@ -1,7 +1,6 @@
-
-
 <?php
 session_start();
+echo "Session is: " . ($_SESSION['user'] ?? 'not set');
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
