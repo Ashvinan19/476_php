@@ -1,0 +1,395 @@
+/* ==== Global Styles ==== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-main {
+    margin-left: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 280px);
+    height: 100vh;
+}
+
+.layout-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+h2 {
+    font-size: 26px;
+    color: #004488;
+    margin-bottom: 12px;
+}
+
+select, input[type="file"], input[type="text"], input[type="password"], input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    background: #f8fafc;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: #a0aec0;
+}
+
+/* ==== Container and Layout ==== */
+.main-content {
+    margin-left: 280px;
+    padding: 40px;
+    width: calc(100% - 280px);
+}
+
+.dashboard-page .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 80px;
+    height: auto;
+}
+
+.container {
+    background: white;
+    padding: 60px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.dashboard-container {
+    background: white;
+    padding: 60px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin-top: 80px;
+    position: relative;
+}
+
+.dashboard-container h2 {
+    color: #003366;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.dashboard-container p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.dashboard-container .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.container h2 {
+    color: #003366;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.container label {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ==== Button Styles ==== */
+.button-link,
+input[type="submit"] {
+    background: #4a5568;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.button-link:hover,
+input[type="submit"]:hover {
+    background: #2d3748;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 85, 104, 0.3);
+}
+
+.button-link:disabled,
+input[type="submit"]:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+}
+
+/* ==== Sidebar Styles ==== */
+.modern-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    background: #4a5568;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-title {
+    padding: 30px 25px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.modern-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modern-sidebar nav li {
+    margin: 8px 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.modern-sidebar nav li:hover {
+    transform: translateX(3px);
+}
+
+.modern-sidebar nav a {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modern-sidebar nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.modern-sidebar nav a.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==== Login Page ==== */
+.login-page {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    width: 100%;
+    height: 100vh;
+}
+
+.login-main {
+    margin-left: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 280px);
+    height: 100vh;
+}
+
+.login-page .container {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-page .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.login-page .form-group label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.login-page .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f8fafc;
+    font-size: 14px;
+}
+
+.login-page .form-group input:focus {
+    outline: none;
+    border-color: #4a5568;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74, 85, 104, 0.1);
+}
+
+.login-page h2 {
+    font-size: 28px;
+    color: #003366;
+    margin-bottom: 24px;
+}
+
+/* ==== Message Styles ==== */
+.error-message {
+    background: #fed7d7;
+    color: #9b2c2c;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #feb2b2;
+    margin-top: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.success-message {
+    background: #c6f6d5;
+    color: #2f855a;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #9ae6b4;
+    margin-top: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ==== Table Styles ==== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==== Responsive ==== */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+
+    .modern-sidebar {
+        width: 250px;
+        transform: translateX(-100%);
+    }
+
+    .modern-sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: block;
+    }
+}
+
+/* ==== Table Button Row Styling ==== */
+.table-button-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.inventory-btn {
+    background: #4299e1;
+}
+
+.inventory-btn:hover {
+    background: #3182ce;
+}
+
+.product-btn {
+    background: #48bb78;
+}
+
+.product-btn:hover {
+    background: #38a169;
+}
+
+.supplier-btn {
+    background: #ed8936;
+}
+
+.supplier-btn:hover {
+    background: #dd6b20;
+}
+
+.table-button-row .active {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    font-weight: bold;
+}

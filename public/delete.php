@@ -22,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute([$productID, $supplierName]);
 
         if ($stmt->rowCount()) {
-            $message = "Record were successfully deleted.";
+            $message = "Record was successfully deleted.";
         } else {
-            $message = "No matching record were found for ProductID {$productID} and Supplier '{$supplierName}'.";
+            $message = "No matching record was found for ProductID {$productID} and Supplier '{$supplierName}'.";
         }
     } catch (PDOException $e) {
         $message = "Error: " . $e->getMessage();
@@ -36,32 +36,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Delete Product</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div style="position: fixed; top: 0; right: 0; width: 200px; height: 100%; background-color: #f0f0f0; padding: 20px;">
-        <h4>Navigation</h4>
-        <ul style="list-style-type: none; padding: 0;">
-            <li><a href="uploadFile.php">Upload File</a></li>
-            <li><a href="search.php">Search Inventory</a></li>
-            <li><a href="delete.php">Delete Product</a></li>
-            <li><a href="update.php">Update Product</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
+    <?php include '../includes/navbar.php'; ?>
+
+    <div class="main-content">
+        <div class="container">
+            <h2>Delete Product from Inventory</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label for="product_id">Product ID:</label>
+                    <input type="number" name="product_id" id="product_id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="supplier_name">Supplier Name:</label>
+                    <input type="text" name="supplier_name" id="supplier_name" required>
+                </div>
+
+                <input class="button-link" type="submit" value="Delete">
+            </form>
+
+            <?php if ($message): ?>
+                <div class="<?php echo str_starts_with($message, 'Error') ? 'error-message' : 'success-message'; ?>">
+                    <?php echo htmlspecialchars($message); ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
-
-    <h2>Delete Product from Inventory</h2>
-    <form method="post">
-        <label>Product ID:</label><br>
-        <input type="number" name="product_id" required><br><br>
-
-        <label>Supplier Name:</label><br>
-        <input type="text" name="supplier_name" required><br><br>
-
-        <input type="submit" value="Delete">
-    </form>
-
-    <?php if ($message): ?>
-        <p><?php echo htmlspecialchars($message); ?></p>
-    <?php endif; ?>
 </body>
 </html>

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if (move_uploaded_file($fileTmpPath, $dest_path)) {
-            echo "<p>Your file has been uploaded.</p>";
+            // echo "<p>Your file has been uploaded.</p>";
 
             // Use $pdo from db.php
             try {
@@ -57,13 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 $data[4] = substr($data[4], 0, 100); // Email
                             }
                         try {
-                            echo "<pre>Full row length: " . count($data) . " → " . htmlspecialchars(json_encode($data)) . "</pre>";
+                            // echo "<pre>Full row length: " . count($data) . " → " . htmlspecialchars(json_encode($data)) . "</pre>";
                             if ($table === "Product") {
                                 $checkStmt->execute([$data[0], $data[6], $data[5]]);
                                 if ($checkStmt->fetchColumn() == 0) {
                                     $insertStmt->execute($data);
                                 } else {
-                                    echo "<p style='color:orange;'>Duplicate skipped for ProductID {$data[0]}, SupplierID {$data[6]}, Status '{$data[5]}'</p>";
+                                    // echo "<p style='color:orange;'>Duplicate skipped for ProductID {$data[0]}, SupplierID {$data[6]}, Status '{$data[5]}'</p>";
                                 }
                             } else {
                                 $stmt->execute($data);
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             ORDER BY p.ProductID ASC
                         ")->fetchAll(PDO::FETCH_ASSOC);
 
-                        echo '<pre>Inventory Preview:' . print_r($preview, true) . '</pre>';
+                        // Preview omitted in production
 
                         $pdo->exec("
                             DELETE FROM InventoryTable;
@@ -112,7 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             ORDER BY p.ProductID ASC
                         ");
                     }
-                    echo "<p>Data has been inserted into the $table table.</p>";
+                    // echo "<p>Data has been inserted into the $table table.</p>";
+                    $successMessage = "Data successfully inserted into the $table table.";
                 }
             } catch (PDOException $e) {
                 echo "<p style='color:red;'>Database error: " . $e->getMessage() . "</p>";
@@ -137,25 +138,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "</p>";
     }
 }
+if (isset($successMessage)) {
+    echo "<p class='success-message'>$successMessage</p>";
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Upload File</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
     <?php include '../includes/navbar.php'; ?>
-    <h2>Upload CSV File to Product or Supplier Table</h2>
-    <form method="post" enctype="multipart/form-data">
-        <label>Select CSV file:</label>
-        <input type="file" name="the_file" required><br><br>
-        <label>Select target table:</label>
-        <select name="table" required>
-            <option value="Product">Product</option>
-            <option value="Supplier">Supplier</option>
-        </select><br><br>
-        <input type="submit" value="Upload">
-    </form>
+    <div class="main-content">
+        <div class="container">
+            <h2>Upload CSV File to Product or Supplier Table</h2>
+            <form method="post" enctype="multipart/form-data">
+                <label>Select CSV file:</label><br>
+                <input type="file" name="the_file" required><br><br>
+                <label>Select target table:</label><br>
+                <select name="table" required>
+                    <option value="Product">Product</option>
+                    <option value="Supplier">Supplier</option>
+                </select><br><br>
+                <input class="button-link" type="submit" value="Upload">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

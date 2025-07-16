@@ -36,27 +36,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Inventory Admin</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
-    <!--<?php include '../includes/navbar.php'; ?>-->
-    <h2>Login</h2>
-    <?php if (!empty($error)): ?>
-        <div style="color:red; font-weight:bold; margin-bottom:15px;">
-            <?php echo htmlspecialchars($error); ?>
+<body class="login-page">
+    <?php include '../includes/navbar.php'; ?>
+    <div class="layout-wrapper">
+        <div class="login-main">
+            <div class="container">
+                <h2>Login</h2>
+                <?php if (!empty($error)): ?>
+                    <div class="error-message">
+                        <?php echo htmlspecialchars($error); ?>
+                    </div>
+                <?php endif; ?>
+                <form method="post" action="">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="button-link">Login</button>
+                </form>
+            </div>
         </div>
-    <?php endif; ?>
-    <form method="post" action="">
-        <label>Username:</label><br>
-        <input type="text" name="username" required><br><br>
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
-        <input type="submit" value="Login">
-    </form>
-    <?php if ($error): ?>
-        <p style="color:red;"><?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
+    </div>
 </body>
 </html>
